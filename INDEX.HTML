@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Usuário - Mobilidade Urbana</title>
+    <link rel="stylesheet" href="CODE.CSS">
+</head>
+<body>
+    <div class="container">
+        <h1>Cadastro de Usuário</h1>
+        <form action="#" method="POST" id="registrationForm">
+            <label for="email">E-mail:</label>
+            <div class="input-group">
+                <input type="email" id="email" name="email" placeholder="Digite seu e-mail" required>
+                <button type="button" class="voice-btn" onclick="startVoiceInput('email')">🎤</button>
+            </div>
+
+            <label for="password">Senha:</label>
+            <div class="input-group">
+                <input type="password" id="password" name="password" placeholder="Digite sua senha" required>
+                <button type="button" class="voice-btn" onclick="startVoiceInput('password')">🎤</button>
+            </div>
+
+            <label for="govbr">Ou utilize o GOV.BR:</label>
+            <button id="govbr" type="button" onclick="window.location.href='https://www.gov.br/pt-br'">
+                Acessar com GOV.BR
+            </button>
+
+            <button type="submit" class="submit-btn">Cadastrar</button>
+        </form>
+
+        <div class="ask-bus">
+            <h2>Consultar Próximo Ônibus</h2>
+            <label for="bus-line">Informe a linha de ônibus:</label>
+            <div class="input-group">
+                <input type="text" id="bus-line" name="bus-line" placeholder="Digite a linha de ônibus">
+                <button type="button" class="voice-btn" onclick="startVoiceInput('bus-line')">🎤</button>
+            </div>
+
+            <button type="button" class="submit-btn" onclick="consultarOnibus()">Consultar</button>
+        </div>
+    </div>
+
+    <script>
+        function startVoiceInput(inputId) {
+            const inputField = document.getElementById(inputId);
+            if (window.SpeechRecognition || window.webkitSpeechRecognition) {
+                const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+                recognition.lang = 'pt-BR';
+                recognition.onresult = function(event) {
+                    inputField.value = event.results[0][0].transcript;
+                };
+                recognition.start();
+            } else {
+                alert("Reconhecimento de voz não é suportado neste navegador.");
+            }
+        }
+
+        function consultarOnibus() {
+            alert('Consultando próximo horário do ônibus...');
+        }
+    </script>
+</body>
+</html>
